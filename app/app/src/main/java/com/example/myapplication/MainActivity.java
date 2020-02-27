@@ -1,10 +1,8 @@
 package com.example.myapplication;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.globant.counter.android.R;
+import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
