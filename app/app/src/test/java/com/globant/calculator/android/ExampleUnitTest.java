@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.globant.calculator.android;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
