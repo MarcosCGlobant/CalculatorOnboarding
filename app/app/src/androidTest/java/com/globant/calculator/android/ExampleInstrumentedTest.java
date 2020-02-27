@@ -1,4 +1,4 @@
-package com.globant.counter.android;
+package com.globant.calculator.android;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

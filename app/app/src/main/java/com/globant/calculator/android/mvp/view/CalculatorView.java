@@ -1,4 +1,4 @@
-package com.globant.counter.android.mvp.view;
+package com.globant.calculator.android.mvp.view;
 
 
 public class CalculatorView extends ActivityView {

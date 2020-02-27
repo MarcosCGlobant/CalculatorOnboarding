@@ -1,7 +1,7 @@
-package com.globant.counter.android.mvp.presenter;
+package com.globant.calculator.android.mvp.presenter;
 
-import com.globant.counter.android.mvp.model.CalculatorModel;
-import com.globant.counter.android.mvp.view.CalculatorView;
+import com.globant.calculator.android.mvp.model.CalculatorModel;
+import com.globant.calculator.android.mvp.view.CalculatorView;
 
 public class CalculatorPresenter {
 
