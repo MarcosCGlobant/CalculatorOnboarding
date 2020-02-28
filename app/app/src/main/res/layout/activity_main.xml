@@ -13,8 +13,8 @@
         android:id="@+id/calculation_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F6FBF9"
-        android:text="@string/_0"
+        android:background="@color/label_background"
+        android:hint="@string/label"
         android:textSize="@dimen/activity_calculation_label_text_size"
         app:layout_constraintBaseline_creator="@+id/activity_main"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         android:id="@+id/number_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_1"
+        android:text="@string/button_one"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toStartOf="@id/number_two"
         app:layout_constraintTop_toBottomOf="@id/calculation_label" />
@@ -42,7 +42,7 @@
         android:id="@+id/number_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_2"
+        android:text="@string/button_two"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toStartOf="@id/number_three"
         app:layout_constraintTop_toBottomOf="@id/calculation_label" />
@@ -51,7 +51,7 @@
         android:id="@+id/number_three"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_3"
+        android:text="@string/button_three"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calculation_label" />
@@ -60,7 +60,7 @@
         android:id="@+id/number_four"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_4"
+        android:text="@string/button_four"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toStartOf="@id/number_five"
         app:layout_constraintTop_toBottomOf="@id/clear_button" />
@@ -69,7 +69,7 @@
         android:id="@+id/number_five"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_5"
+        android:text="@string/button_five"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toStartOf="@id/number_six"
         app:layout_constraintTop_toBottomOf="@id/clear_button" />
@@ -78,7 +78,7 @@
         android:id="@+id/number_six"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_6"
+        android:text="@string/button_six"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clear_button" />
@@ -87,17 +87,16 @@
         android:id="@+id/number_seven"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_7"
+        android:text="@string/button_seven"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toStartOf="@id/number_eight"
         app:layout_constraintTop_toBottomOf="@id/add_button" />
-
 
     <Button
         android:id="@+id/number_eight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_8"
+        android:text="@string/button_eight"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toStartOf="@id/number_nine"
         app:layout_constraintTop_toBottomOf="@id/add_button" />
@@ -106,7 +105,7 @@
         android:id="@+id/number_nine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_9"
+        android:text="@string/button_nine"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_button" />
@@ -115,7 +114,7 @@
         android:id="@+id/number_zero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_0"
+        android:text="@string/button_zero"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toEndOf="@id/number_eight"
         app:layout_constraintTop_toBottomOf="@id/subtraction_button" />
