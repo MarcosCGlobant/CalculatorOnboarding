@@ -13,7 +13,7 @@
         android:id="@+id/calculation_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F6FBF9"
+        android:background="@color/label_background"
         android:text="@string/_0"
         android:textSize="@dimen/activity_calculation_label_text_size"
         app:layout_constraintBaseline_creator="@+id/activity_main"
