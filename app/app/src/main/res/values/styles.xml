@@ -4,5 +4,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="actionButtonStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/activity_button_width</item>
+        <item name="android:backgroundTint">@color/action_button_color</item>
+    </style>
+    <style name="numberButtonStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:backgroundTint">@color/number_button_color</item>
+    </style>
 
 </resources>
