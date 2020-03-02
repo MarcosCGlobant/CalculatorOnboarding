@@ -3,12 +3,8 @@ package com.globant.calculator.android.mvp.presenter;
 import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
 
-import static com.globant.calculator.android.utils.Constants.DIVIDE;
 import static com.globant.calculator.android.utils.Constants.EMPTY_STRING;
-import static com.globant.calculator.android.utils.Constants.MINUS;
-import static com.globant.calculator.android.utils.Constants.MULTIPLY;
 import static com.globant.calculator.android.utils.Constants.NUMBER_ZERO;
-import static com.globant.calculator.android.utils.Constants.PLUS;
 import static com.globant.calculator.android.utils.Constants.ZERO_INT;
 
 public class CalculatorPresenter {
@@ -27,28 +23,13 @@ public class CalculatorPresenter {
         view.showResult(ZERO_INT);
     }
 
-    public void onAddButtonPressed(String symbol) {
+    public void onOperatorPressed(String symbol){
         model.setOperator(symbol);
-        view.showOperationPressed(PLUS);
-    }
-
-    public void onMultiplyButtonPressed(String symbol) {
-        model.setOperator(symbol);
-        view.showOperationPressed(MULTIPLY);
-    }
-
-    public void onSubtractionButtonPressed(String symbol) {
-        model.setOperator(symbol);
-        view.showOperationPressed(MINUS);
-    }
-
-    public void onDivideButtonPressed(String symbol) {
-        model.setOperator(symbol);
-        view.showOperationPressed(DIVIDE);
+        view.showOperationPressed(symbol);
     }
 
     public void onEqualsButtonPressed(String symbol) {
-
+        // will be added when implements the equals button
     }
 
     public void onNumberButtonPress(String number){

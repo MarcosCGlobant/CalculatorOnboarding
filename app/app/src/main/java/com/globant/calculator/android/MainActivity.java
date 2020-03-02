@@ -39,16 +39,6 @@ public class MainActivity extends AppCompatActivity {
         presenter = new CalculatorPresenter(new CalculatorModel(), new CalculatorView(this));
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
     @OnClick(R.id.number_one)
     public void oneButtonPressed() {
         presenter.onNumberButtonPress(NUMBER_ONE);
@@ -100,22 +90,22 @@ public class MainActivity extends AppCompatActivity {
     }
     @OnClick(R.id.add_button)
     public void addButtonPressed() {
-        presenter.onAddButtonPressed(PLUS);
+        presenter.onOperatorPressed(PLUS);
     }
 
     @OnClick(R.id.multiply_button)
     public void multiplyButtonPressed() {
-        presenter.onMultiplyButtonPressed(MULTIPLY);
+        presenter.onOperatorPressed(MULTIPLY);
     }
 
     @OnClick(R.id.subtraction_button)
     public void subtractionButtonPressed() {
-        presenter.onSubtractionButtonPressed(MINUS);
+        presenter.onOperatorPressed(MINUS);
     }
 
     @OnClick(R.id.divide_button)
     public void divideButtonPressed() {
-        presenter.onDivideButtonPressed(DIVIDE);
+        presenter.onOperatorPressed(DIVIDE);
     }
 
     @OnClick(R.id.equals_button)
