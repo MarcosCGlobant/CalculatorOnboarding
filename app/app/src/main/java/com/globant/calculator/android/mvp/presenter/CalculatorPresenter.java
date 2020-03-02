@@ -4,7 +4,6 @@ import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
 
 import static com.globant.calculator.android.utils.Constants.DIVIDE;
-import static com.globant.calculator.android.utils.Constants.EMPTY_STRING;
 import static com.globant.calculator.android.utils.Constants.MINUS;
 import static com.globant.calculator.android.utils.Constants.MULTIPLY;
 import static com.globant.calculator.android.utils.Constants.NUMBER_ZERO;
@@ -34,7 +33,7 @@ public class CalculatorPresenter {
     }
 
     public void onEqualsButtonPressed() {
-        if (model.getOperator().equals(EMPTY_STRING)) {
+        if (model.getOperator().isEmpty()) {
             view.showResult(parseInt(model.getFirstNumber()));
         } else {
             view.showResult(calculateResult());
@@ -42,13 +41,13 @@ public class CalculatorPresenter {
     }
 
     public void onNumberButtonPress(String number) {
-        if ((model.getOperator().equals(EMPTY_STRING)) && (!model.getFirstNumber().equals(EMPTY_STRING))) {
+        if ((model.getOperator().isEmpty()) && (!model.getFirstNumber().isEmpty())) {
             model.setFirstNumber(model.getFirstNumber() + number);
             view.showNumberPressed(model.getFirstNumber());
-        } else if ((!model.getOperator().equals(EMPTY_STRING)) && (!model.getSecondNumber().equals(EMPTY_STRING))) {
+        } else if ((!model.getOperator().isEmpty()) && (!model.getSecondNumber().isEmpty())) {
             model.setSecondNumber(model.getSecondNumber() + number);
             view.showNumberPressed(model.getSecondNumber());
-        } else if ((!model.getOperator().equals(EMPTY_STRING)) && (model.getSecondNumber().equals(EMPTY_STRING))) {
+        } else if ((!model.getOperator().isEmpty()) && (model.getSecondNumber().isEmpty())) {
             model.setSecondNumber(number);
             view.showNumberPressed(model.getSecondNumber());
         } else {
