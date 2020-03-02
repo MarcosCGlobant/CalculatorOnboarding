@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.globant.calculator.android.utils.Constants.DIVIDE;
-import static com.globant.calculator.android.utils.Constants.EQUALS;
+import static com.globant.calculator.android.utils.Constants.DOT_BUTTON;
 import static com.globant.calculator.android.utils.Constants.MINUS;
 import static com.globant.calculator.android.utils.Constants.MULTIPLY;
 import static com.globant.calculator.android.utils.Constants.NUMBER_EIGHT;
@@ -88,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.number_zero)
     public void zeroButtonPressed() {
         presenter.onNumberButtonPress(NUMBER_ZERO);
+    }
+
+    @OnClick(R.id.dot_button)
+    public void dotButtonPressed() {
+        presenter.onNumberButtonPress(DOT_BUTTON);
     }
 
     @OnClick(R.id.add_button)

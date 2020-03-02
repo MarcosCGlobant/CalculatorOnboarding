@@ -141,4 +141,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divide_button" />
 
+    <Button
+        android:id="@+id/dot_button"
+        style="@style/numberButtonStyle"
+        android:text="@string/dot_button"
+        app:layout_constraintEnd_toEndOf="@id/number_seven"
+        app:layout_constraintTop_toBottomOf="@id/subtraction_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,8 +8,7 @@ import static com.globant.calculator.android.utils.Constants.MINUS;
 import static com.globant.calculator.android.utils.Constants.MULTIPLY;
 import static com.globant.calculator.android.utils.Constants.NUMBER_ZERO;
 import static com.globant.calculator.android.utils.Constants.PLUS;
-import static com.globant.calculator.android.utils.Constants.ZERO_INT;
-import static java.lang.Integer.parseInt;
+import static com.globant.calculator.android.utils.Constants.ZERO_DOUBLE;
 
 public class CalculatorPresenter {
 
@@ -24,7 +23,7 @@ public class CalculatorPresenter {
     public void onClearButtonPress() {
         model.clear();
         view.showOperationPressed(NUMBER_ZERO);
-        view.showResult(ZERO_INT);
+        view.showResult(NUMBER_ZERO);
     }
 
     public void onOperatorPressed(String symbol) {
@@ -34,7 +33,7 @@ public class CalculatorPresenter {
 
     public void onEqualsButtonPressed() {
         if (model.getOperator().isEmpty()) {
-            view.showResult(parseInt(model.getFirstNumber()));
+            view.showResult(model.getFirstNumber());
         } else {
             view.showResult(calculateResult());
         }
@@ -56,27 +55,32 @@ public class CalculatorPresenter {
         }
     }
 
-    private Integer calculateResult() {
+    private String calculateResult() {
 
-        String firstNumber = model.getFirstNumber();
-        String secondNumber = model.getSecondNumber();
-        Integer result = ZERO_INT;
+        Double firstNumber = Double.parseDouble(model.getFirstNumber());
+        Double secondNumber = Double.parseDouble(model.getSecondNumber());
+        Double result = ZERO_DOUBLE;
 
         switch (model.getOperator()) {
             case PLUS:
-                result = parseInt(firstNumber) + parseInt(secondNumber);
+                result = firstNumber + secondNumber;
                 break;
             case MINUS:
-                result = parseInt(firstNumber) - (parseInt(secondNumber));
+                result = firstNumber - secondNumber;
                 break;
             case MULTIPLY:
-                result = parseInt(firstNumber) * (parseInt(secondNumber));
+                result = firstNumber * secondNumber;
                 break;
             case DIVIDE:
-                result = parseInt(firstNumber) / (parseInt(secondNumber));
+                if (secondNumber.equals(ZERO_DOUBLE)) {
+                    view.showError();
+                    onClearButtonPress();
+                } else {
+                    result = firstNumber / secondNumber;
+                }
                 break;
         }
-        return result;
+        return result.toString();
     }
 
 }

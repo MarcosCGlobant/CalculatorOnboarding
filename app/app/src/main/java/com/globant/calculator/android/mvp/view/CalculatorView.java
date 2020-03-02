@@ -2,6 +2,7 @@ package com.globant.calculator.android.mvp.view;
 
 import android.app.Activity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 
@@ -20,8 +21,8 @@ public class CalculatorView extends ActivityView {
         ButterKnife.bind(this, activity);
     }
 
-    public void showResult(Integer result) {
-        calculationLabel.setText(result.toString());
+    public void showResult(String result) {
+        calculationLabel.setText(result);
     }
 
     public void showNumberPressed(String number) {
@@ -32,4 +33,7 @@ public class CalculatorView extends ActivityView {
         inputLabel.setText(symbol);
     }
 
+    public void showError() {
+        Toast.makeText(getContext(), "Division por cero", Toast.LENGTH_LONG).show();
+    }
 }
