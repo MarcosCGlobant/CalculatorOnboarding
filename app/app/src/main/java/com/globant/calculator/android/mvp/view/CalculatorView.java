@@ -2,7 +2,9 @@ package com.globant.calculator.android.mvp.view;
 
 import android.app.Activity;
 import android.widget.TextView;
+
 import com.example.myapplication.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -22,12 +24,12 @@ public class CalculatorView extends ActivityView {
         calculationLabel.setText(result.toString());
     }
 
-   public void showNumberPressed(String number){
-       inputLabel.setText(number);
-   }
+    public void showNumberPressed(String number) {
+        inputLabel.setText(number);
+    }
 
-   public void showOperationPressed(String symbol){
-       inputLabel.setText(symbol);
-   }
+    public void showOperationPressed(String symbol) {
+        inputLabel.setText(symbol);
+    }
 
 }

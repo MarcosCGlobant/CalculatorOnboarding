@@ -3,9 +3,14 @@ package com.globant.calculator.android.mvp.presenter;
 import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
 
+import static com.globant.calculator.android.utils.Constants.DIVIDE;
 import static com.globant.calculator.android.utils.Constants.EMPTY_STRING;
+import static com.globant.calculator.android.utils.Constants.MINUS;
+import static com.globant.calculator.android.utils.Constants.MULTIPLY;
 import static com.globant.calculator.android.utils.Constants.NUMBER_ZERO;
+import static com.globant.calculator.android.utils.Constants.PLUS;
 import static com.globant.calculator.android.utils.Constants.ZERO_INT;
+import static java.lang.Integer.parseInt;
 
 public class CalculatorPresenter {
 
@@ -23,32 +28,56 @@ public class CalculatorPresenter {
         view.showResult(ZERO_INT);
     }
 
-    public void onOperatorPressed(String symbol){
+    public void onOperatorPressed(String symbol) {
         model.setOperator(symbol);
         view.showOperationPressed(symbol);
     }
 
-    public void onEqualsButtonPressed(String symbol) {
-        // will be added when implements the equals button
+    public void onEqualsButtonPressed() {
+        if (model.getOperator().equals(EMPTY_STRING)) {
+            view.showResult(parseInt(model.getFirstNumber()));
+        } else {
+            view.showResult(calculateResult());
+        }
     }
 
-    public void onNumberButtonPress(String number){
-        if ((model.getOperator().equals(EMPTY_STRING) ) && (!model.getFirstNumber().equals(EMPTY_STRING) )){
+    public void onNumberButtonPress(String number) {
+        if ((model.getOperator().equals(EMPTY_STRING)) && (!model.getFirstNumber().equals(EMPTY_STRING))) {
             model.setFirstNumber(model.getFirstNumber() + number);
             view.showNumberPressed(model.getFirstNumber());
-        }
-        else if ((!model.getOperator().equals(EMPTY_STRING)) && (!model.getSecondNumber().equals(EMPTY_STRING))){
+        } else if ((!model.getOperator().equals(EMPTY_STRING)) && (!model.getSecondNumber().equals(EMPTY_STRING))) {
             model.setSecondNumber(model.getSecondNumber() + number);
             view.showNumberPressed(model.getSecondNumber());
-        }
-        else if ((!model.getOperator().equals(EMPTY_STRING)) && (model.getSecondNumber().equals(EMPTY_STRING))){
+        } else if ((!model.getOperator().equals(EMPTY_STRING)) && (model.getSecondNumber().equals(EMPTY_STRING))) {
             model.setSecondNumber(number);
             view.showNumberPressed(model.getSecondNumber());
-        }
-        else {
+        } else {
             model.setFirstNumber(number);
             view.showNumberPressed(model.getFirstNumber());
         }
+    }
+
+    private Integer calculateResult() {
+
+        String firstNumber = model.getFirstNumber();
+        String secondNumber = model.getSecondNumber();
+        Integer result = ZERO_INT;
+
+        switch (model.getOperator()) {
+            case PLUS:
+                result = parseInt(firstNumber) + parseInt(secondNumber);
+                break;
+            case MINUS:
+                result = parseInt(firstNumber) - (parseInt(secondNumber));
+                break;
+            case MULTIPLY:
+                result = parseInt(firstNumber) * (parseInt(secondNumber));
+                break;
+            case DIVIDE:
+                result = parseInt(firstNumber) / (parseInt(secondNumber));
+                break;
+        }
+        return result;
     }
 
 }

@@ -32,7 +32,7 @@ public class CalculatorModel {
         this.operator = operator;
     }
 
-    public void clear(){
+    public void clear() {
         firstNumber = EMPTY_STRING;
         secondNumber = EMPTY_STRING;
         operator = EMPTY_STRING;

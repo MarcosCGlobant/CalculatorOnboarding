@@ -1,6 +1,7 @@
 package com.globant.calculator.android;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public void zeroButtonPressed() {
         presenter.onNumberButtonPress(NUMBER_ZERO);
     }
+
     @OnClick(R.id.add_button)
     public void addButtonPressed() {
         presenter.onOperatorPressed(PLUS);
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.equals_button)
     public void equalsButtonPressed() {
-        presenter.onEqualsButtonPressed(EQUALS);
+        presenter.onEqualsButtonPressed();
     }
 
     @OnClick(R.id.clear_button)
