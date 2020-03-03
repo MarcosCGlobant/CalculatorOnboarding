@@ -8,6 +8,7 @@ import com.globant.calculator.android.mvp.view.CalculatorView;
 import static com.globant.calculator.android.utils.Constants.DECIMAL_FORMAT;
 import static com.globant.calculator.android.utils.Constants.DIVIDE;
 import static com.globant.calculator.android.utils.Constants.DOT_BUTTON;
+import static com.globant.calculator.android.utils.Constants.EMPTY_STRING;
 import static com.globant.calculator.android.utils.Constants.MINUS;
 import static com.globant.calculator.android.utils.Constants.MULTIPLY;
 import static com.globant.calculator.android.utils.Constants.NUMBER_ZERO;
@@ -34,17 +35,48 @@ public class CalculatorPresenter {
         view.handleOperations(false);
     }
 
+    public void onDeleteButtonPress() {
+        String reduction = EMPTY_STRING;
+
+        if (model.getOperator().isEmpty()) {
+            reduction = model.getFirstNumber();
+            if (!reduction.isEmpty()) {
+                reduction = reduction.substring(0, reduction.length() - 1);
+                model.setFirstNumber(reduction);
+                view.showNumberPressed(model.getFirstNumber());
+            }
+        } else {
+            reduction = model.getSecondNumber();
+            if (!reduction.isEmpty()) {
+                reduction = reduction.substring(0, reduction.length() - 1);
+                model.setSecondNumber(reduction);
+                view.showNumberPressed(model.getSecondNumber());
+            }
+        }
+    }
+
     public void onOperatorPressed(String symbol) {
-        model.setOperator(symbol);
-        view.showOperationPressed(symbol);
-        view.handleDot(true);
+        if (model.getOperator().isEmpty() || model.getSecondNumber().isEmpty()) {
+            model.setOperator(symbol);
+            view.showOperationPressed(symbol);
+            view.handleDot(true);
+        } else if (!model.getSecondNumber().isEmpty()) {
+            model.setFirstNumber(calculateResult());
+            view.showResult(model.getFirstNumber());
+            model.setSecondNumber(EMPTY_STRING);
+            model.setOperator(symbol);
+            view.showOperationPressed(symbol);
+            view.handleDot(true);
+        }
     }
 
     public void onEqualsButtonPressed() {
         if ((!model.getFirstNumber().isEmpty()) && (!model.getSecondNumber().isEmpty())) {
             view.showResult(calculateResult());
+            model.clear();
         } else if (model.getOperator().isEmpty()) {
             view.showResult(model.getFirstNumber());
+            model.clear();
         } else {
             view.showError();
             onClearButtonPress();
@@ -70,6 +102,7 @@ public class CalculatorPresenter {
             view.handleDot(false);
         }
         view.handleOperations(true);
+
     }
 
     private String calculateResult() {

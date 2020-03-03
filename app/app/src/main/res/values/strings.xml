@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Calculator Onboarding</string>
     <string name="button_zero">0</string>
     <string name="clear">clear</string>
     <string name="button_one">1</string>
@@ -19,4 +19,5 @@
     <string name="label">0</string>
     <string name="dot_button">.</string>
     <string name="invalid_operation">Operacion Invalida</string>
+    <string name="delete_button">DEL</string>
 </resources>
