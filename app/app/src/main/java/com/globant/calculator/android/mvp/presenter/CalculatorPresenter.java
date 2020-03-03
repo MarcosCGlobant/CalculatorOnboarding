@@ -1,5 +1,7 @@
 package com.globant.calculator.android.mvp.presenter;
 
+import android.icu.text.DecimalFormat;
+
 import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
 
@@ -13,6 +15,7 @@ import static com.globant.calculator.android.utils.Constants.ZERO_DOUBLE;
 
 public class CalculatorPresenter {
 
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
     private CalculatorModel model;
     private CalculatorView view;
 
@@ -21,6 +24,7 @@ public class CalculatorPresenter {
         this.view = view;
         view.handleOperations(false);
     }
+
 
     public void onClearButtonPress() {
         model.clear();
@@ -37,7 +41,7 @@ public class CalculatorPresenter {
     }
 
     public void onEqualsButtonPressed() {
-        if (!(model.getFirstNumber().isEmpty()) && !(model.getSecondNumber().isEmpty())) {
+        if ((!model.getFirstNumber().isEmpty()) && (!model.getSecondNumber().isEmpty())) {
             view.showResult(calculateResult());
         } else if (model.getOperator().isEmpty()) {
             view.showResult(model.getFirstNumber());
@@ -93,7 +97,7 @@ public class CalculatorPresenter {
                 }
                 break;
         }
-        return result.toString();
+        return String.valueOf(df2.format(result));
     }
 
 }
