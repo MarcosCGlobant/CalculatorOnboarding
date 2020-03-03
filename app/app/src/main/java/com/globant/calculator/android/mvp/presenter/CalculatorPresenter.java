@@ -5,6 +5,7 @@ import android.icu.text.DecimalFormat;
 import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
 
+import static com.globant.calculator.android.utils.Constants.DECIMAL_FORMAT;
 import static com.globant.calculator.android.utils.Constants.DIVIDE;
 import static com.globant.calculator.android.utils.Constants.DOT_BUTTON;
 import static com.globant.calculator.android.utils.Constants.MINUS;
@@ -15,7 +16,7 @@ import static com.globant.calculator.android.utils.Constants.ZERO_DOUBLE;
 
 public class CalculatorPresenter {
 
-    private static DecimalFormat df2 = new DecimalFormat("#.##");
+    private DecimalFormat decimalFormatForResults = new DecimalFormat(DECIMAL_FORMAT);
     private CalculatorModel model;
     private CalculatorView view;
 
@@ -97,7 +98,7 @@ public class CalculatorPresenter {
                 }
                 break;
         }
-        return String.valueOf(df2.format(result));
+        return String.valueOf(decimalFormatForResults.format(result));
     }
 
 }

@@ -47,7 +47,7 @@ public class CalculatorView extends ActivityView {
     }
 
     public void showError() {
-        Toast.makeText(getContext(), "Operación Invalida", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), R.string.invalid_operation, Toast.LENGTH_LONG).show();
     }
 
     public void handleDot(boolean control) {

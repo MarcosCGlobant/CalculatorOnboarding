@@ -21,6 +21,6 @@ public class Constants {
     public static final String EMPTY_STRING = "";
     public static final Double ZERO_DOUBLE = 0d;
     public static final String DIVIDED_BY_ZERO = "ERROR";
-
+    public static final String DECIMAL_FORMAT = "#.##";
 
 }
