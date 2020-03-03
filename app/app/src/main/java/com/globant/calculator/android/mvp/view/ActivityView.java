@@ -3,7 +3,9 @@ package com.globant.calculator.android.mvp.view;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+
 import androidx.annotation.Nullable;
+
 import java.lang.ref.WeakReference;
 
 public class ActivityView {

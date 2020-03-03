@@ -17,4 +17,6 @@
     <string name="divide">/</string>
     <string name="equals">=</string>
     <string name="label">0</string>
+    <string name="dot_button">.</string>
+    <string name="invalid_operation">Operacion Invalida</string>
 </resources>
