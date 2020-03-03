@@ -26,7 +26,6 @@ public class CalculatorPresenter {
         view.handleOperations(false);
     }
 
-
     public void onClearButtonPress() {
         model.clear();
         view.showOperationPressed(NUMBER_ZERO);
