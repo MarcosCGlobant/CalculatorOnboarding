@@ -44,6 +44,7 @@ public class CalculatorPresenter {
                 reduction = reduction.substring(0, reduction.length() - 1);
                 model.setFirstNumber(reduction);
                 view.showNumberPressed(model.getFirstNumber());
+                controlDot(model.getFirstNumber());
             }
         } else {
             reduction = model.getSecondNumber();
@@ -51,6 +52,7 @@ public class CalculatorPresenter {
                 reduction = reduction.substring(0, reduction.length() - 1);
                 model.setSecondNumber(reduction);
                 view.showNumberPressed(model.getSecondNumber());
+                controlDot(model.getSecondNumber());
             }
         }
     }
@@ -133,4 +135,11 @@ public class CalculatorPresenter {
         return String.valueOf(decimalFormatForResults.format(result));
     }
 
+    public void controlDot(String number) {
+        if (number.contains(DOT_BUTTON)) {
+            view.handleDot(false);
+        } else {
+            view.handleDot(true);
+        }
+    }
 }
