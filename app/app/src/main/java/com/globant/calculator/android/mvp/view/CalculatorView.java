@@ -1,6 +1,7 @@
 package com.globant.calculator.android.mvp.view;
 
 import android.app.Activity;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,18 @@ public class CalculatorView extends ActivityView {
     TextView calculationLabel;
     @BindView(R.id.input_label)
     TextView inputLabel;
+    @BindView(R.id.dot_button)
+    Button dotButton;
+    @BindView(R.id.add_button)
+    Button addButton;
+    @BindView(R.id.subtraction_button)
+    Button subtractionButton;
+    @BindView(R.id.divide_button)
+    Button divideButton;
+    @BindView(R.id.multiply_button)
+    Button multiplyButton;
+    @BindView(R.id.equals_button)
+    Button equalsButton;
 
     public CalculatorView(Activity activity) {
         super(activity);
@@ -34,6 +47,18 @@ public class CalculatorView extends ActivityView {
     }
 
     public void showError() {
-        Toast.makeText(getContext(), "Division por cero", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Operación Invalida", Toast.LENGTH_LONG).show();
+    }
+
+    public void handleDot(boolean control) {
+        dotButton.setEnabled(control);
+    }
+
+    public void handleOperations(boolean control) {
+        equalsButton.setEnabled(control);
+        subtractionButton.setEnabled(control);
+        addButton.setEnabled(control);
+        multiplyButton.setEnabled(control);
+        divideButton.setEnabled(control);
     }
 }

@@ -4,6 +4,7 @@ import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
 
 import static com.globant.calculator.android.utils.Constants.DIVIDE;
+import static com.globant.calculator.android.utils.Constants.DOT_BUTTON;
 import static com.globant.calculator.android.utils.Constants.MINUS;
 import static com.globant.calculator.android.utils.Constants.MULTIPLY;
 import static com.globant.calculator.android.utils.Constants.NUMBER_ZERO;
@@ -18,24 +19,31 @@ public class CalculatorPresenter {
     public CalculatorPresenter(CalculatorModel model, CalculatorView view) {
         this.model = model;
         this.view = view;
+        view.handleOperations(false);
     }
 
     public void onClearButtonPress() {
         model.clear();
         view.showOperationPressed(NUMBER_ZERO);
         view.showResult(NUMBER_ZERO);
+        view.handleDot(true);
+        view.handleOperations(false);
     }
 
     public void onOperatorPressed(String symbol) {
         model.setOperator(symbol);
         view.showOperationPressed(symbol);
+        view.handleDot(true);
     }
 
     public void onEqualsButtonPressed() {
-        if (model.getOperator().isEmpty()) {
+        if (!(model.getFirstNumber().isEmpty()) && !(model.getSecondNumber().isEmpty())) {
+            view.showResult(calculateResult());
+        } else if (model.getOperator().isEmpty()) {
             view.showResult(model.getFirstNumber());
         } else {
-            view.showResult(calculateResult());
+            view.showError();
+            onClearButtonPress();
         }
     }
 
@@ -53,6 +61,11 @@ public class CalculatorPresenter {
             model.setFirstNumber(number);
             view.showNumberPressed(model.getFirstNumber());
         }
+
+        if (number.equals(DOT_BUTTON)) {
+            view.handleDot(false);
+        }
+        view.handleOperations(true);
     }
 
     private String calculateResult() {
