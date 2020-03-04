@@ -125,4 +125,9 @@ public class MainActivity extends AppCompatActivity {
         presenter.onClearButtonPress();
     }
 
+    @OnClick(R.id.delete_current_button)
+    public void deleteButtonPressed() {
+        presenter.onDeleteButtonPress();
+    }
+
 }

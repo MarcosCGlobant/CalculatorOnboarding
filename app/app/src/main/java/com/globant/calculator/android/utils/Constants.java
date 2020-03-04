@@ -20,6 +20,8 @@ public class Constants {
     public static final String EQUALS = "=";
     public static final String EMPTY_STRING = "";
     public static final Double ZERO_DOUBLE = 0d;
+    public static final Integer ZERO_INT = 0;
+    public static final Integer ONE_INT = 1;
     public static final String DIVIDED_BY_ZERO = "ERROR";
     public static final String DECIMAL_FORMAT = "#.##";
 
