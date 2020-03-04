@@ -12,8 +12,10 @@ import static com.globant.calculator.android.utils.Constants.EMPTY_STRING;
 import static com.globant.calculator.android.utils.Constants.MINUS;
 import static com.globant.calculator.android.utils.Constants.MULTIPLY;
 import static com.globant.calculator.android.utils.Constants.NUMBER_ZERO;
+import static com.globant.calculator.android.utils.Constants.ONE_INT;
 import static com.globant.calculator.android.utils.Constants.PLUS;
 import static com.globant.calculator.android.utils.Constants.ZERO_DOUBLE;
+import static com.globant.calculator.android.utils.Constants.ZERO_INT;
 
 public class CalculatorPresenter {
 
@@ -134,7 +136,7 @@ public class CalculatorPresenter {
 
     public String deleteAndShowNumber(String number) {
         if (!number.isEmpty()) {
-            number = number.substring(0, number.length() - 1);
+            number = number.substring(ZERO_INT, number.length() - ONE_INT);
             view.showNumberPressed(number);
             controlDot(number);
         }
