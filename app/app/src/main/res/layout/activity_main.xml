@@ -70,7 +70,6 @@
             android:id="@+id/number_one"
             style="@style/numberButtonStyle"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:text="@string/button_one"
             app:layout_constraintBottom_toTopOf="@id/number_four"
