@@ -36,39 +36,28 @@ public class CalculatorPresenter {
     }
 
     public void onDeleteButtonPress() {
-        String reduction = EMPTY_STRING;
-
+        String numberToReduce;
+        String reducedNumber;
         if (model.getOperator().isEmpty()) {
-            reduction = model.getFirstNumber();
-            if (!reduction.isEmpty()) {
-                reduction = reduction.substring(0, reduction.length() - 1);
-                model.setFirstNumber(reduction);
-                view.showNumberPressed(model.getFirstNumber());
-                controlDot(model.getFirstNumber());
-            }
+            numberToReduce = model.getFirstNumber();
+            reducedNumber = deleteAndShowNumber(numberToReduce);
+            model.setFirstNumber(reducedNumber);
+
         } else {
-            reduction = model.getSecondNumber();
-            if (!reduction.isEmpty()) {
-                reduction = reduction.substring(0, reduction.length() - 1);
-                model.setSecondNumber(reduction);
-                view.showNumberPressed(model.getSecondNumber());
-                controlDot(model.getSecondNumber());
-            }
+            numberToReduce = model.getSecondNumber();
+            reducedNumber = deleteAndShowNumber(numberToReduce);
+            model.setSecondNumber(reducedNumber);
         }
     }
 
     public void onOperatorPressed(String symbol) {
         if (model.getOperator().isEmpty() || model.getSecondNumber().isEmpty()) {
-            model.setOperator(symbol);
-            view.showOperationPressed(symbol);
-            view.handleDot(true);
+            setValuesOperatorAndHandledDot(symbol);
         } else if (!model.getSecondNumber().isEmpty()) {
             model.setFirstNumber(calculateResult());
             view.showResult(model.getFirstNumber());
             model.setSecondNumber(EMPTY_STRING);
-            model.setOperator(symbol);
-            view.showOperationPressed(symbol);
-            view.handleDot(true);
+            setValuesOperatorAndHandledDot(symbol);
         }
     }
 
@@ -141,5 +130,20 @@ public class CalculatorPresenter {
         } else {
             view.handleDot(true);
         }
+    }
+
+    public String deleteAndShowNumber(String number) {
+        if (!number.isEmpty()) {
+            number = number.substring(0, number.length() - 1);
+            view.showNumberPressed(number);
+            controlDot(number);
+        }
+        return number;
+    }
+
+    public void setValuesOperatorAndHandledDot(String symbol) {
+        model.setOperator(symbol);
+        view.showOperationPressed(symbol);
+        view.handleDot(true);
     }
 }
