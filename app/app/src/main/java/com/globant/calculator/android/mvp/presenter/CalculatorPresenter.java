@@ -44,7 +44,6 @@ public class CalculatorPresenter {
             numberToReduce = model.getFirstNumber();
             reducedNumber = deleteAndShowNumber(numberToReduce);
             model.setFirstNumber(reducedNumber);
-
         } else {
             numberToReduce = model.getSecondNumber();
             reducedNumber = deleteAndShowNumber(numberToReduce);
