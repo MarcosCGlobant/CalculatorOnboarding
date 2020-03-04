@@ -63,10 +63,11 @@ public class CalculatorPresenter {
     }
 
     public void onEqualsButtonPressed() {
-        if ((!model.getFirstNumber().isEmpty()) && (!model.getSecondNumber().isEmpty())) {
+        if ((!model.getFirstNumber().isEmpty()) && (!model.getSecondNumber().isEmpty()) &&
+            (!model.getFirstNumber().equals(DOT_BUTTON)) && (!model.getSecondNumber().equals(DOT_BUTTON)) ) {
             view.showResult(calculateResult());
             model.clear();
-        } else if (model.getOperator().isEmpty()) {
+        } else if (model.getOperator().isEmpty() && (!model.getFirstNumber().equals(DOT_BUTTON))) {
             view.showResult(model.getFirstNumber());
             model.clear();
         } else {
