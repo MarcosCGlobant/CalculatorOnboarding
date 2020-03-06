@@ -2,7 +2,6 @@ package com.globant.calculator.android.mvp.presenter;
 
 import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
-import com.globant.calculator.android.utils.DecimalUtils;
 
 import static com.globant.calculator.android.utils.Constants.DIVIDE;
 import static com.globant.calculator.android.utils.Constants.DOT_BUTTON;
@@ -17,14 +16,12 @@ import static com.globant.calculator.android.utils.Constants.ZERO_INT;
 
 public class CalculatorPresenter {
 
-    private DecimalUtils decimalFormatForResults;
     private CalculatorModel model;
     private CalculatorView view;
 
-    public CalculatorPresenter(CalculatorModel model, CalculatorView view, DecimalUtils decimalFormatForResults) {
+    public CalculatorPresenter(CalculatorModel model, CalculatorView view) {
         this.model = model;
         this.view = view;
-        this.decimalFormatForResults = decimalFormatForResults;
         view.handleOperations(false);
     }
 
@@ -122,7 +119,7 @@ public class CalculatorPresenter {
                 }
                 break;
         }
-        return decimalFormatForResults.getResultWithNewFormat(result);
+        return String.valueOf(result);
     }
 
     private void controlDot(String number) {

@@ -2,7 +2,6 @@ package com.globant.calculator.android.mvp.presenter;
 
 import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
-import com.globant.calculator.android.utils.DecimalUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,28 +18,23 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class CalculatorPresenterTest {
 
     private CalculatorModel model = new CalculatorModel();
     private CalculatorView mockedView = mock(CalculatorView.class);
-    private DecimalUtils decimalFormatForResults = mock(DecimalUtils.class);
     private CalculatorPresenter presenter;
     private static final String NUMBER_TEST = "50";
     private static final String NUMBER_TEST_WITH_DOT = "50.12";
     private static final String REDUCED_NUMBER_TEST = "5";
     private static final String REDUCED_NUMBER_TEST_WITH_DOT = "50.1";
-    private static final String NUMBER_TEST_TIMES_TWO = "100";
+    private static final String NUMBER_TEST_TIMES_TWO = "100.0";
     private static final String MULTIPLY_RESULT = "25";
-    private static final Double DOUBLE_RESULT_100 = 100.0;
-    private static final Double DOUBLE_RESULT_25 = 25.0;
-    private static final Double DOUBLE_RESULT_0 = 0.0;
-    private static final Double DOUBLE_RESULT_5 = 5.0;
+    private static final String ADD_TO_MATCH_RESULT = ".0";
 
     @Before
     public void setUp() {
-        presenter = new CalculatorPresenter(model, mockedView, decimalFormatForResults);
+        presenter = new CalculatorPresenter(model, mockedView);
     }
 
     @Test
@@ -88,7 +82,6 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onOperatorPressedWithSecondNumberShowOperatorAndSetOnModel() {
-        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_100)).thenReturn(NUMBER_TEST_TIMES_TWO);
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
         model.setSecondNumber(NUMBER_TEST);
@@ -105,7 +98,6 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onEqualsPressedWithFirstAndSecondNumberAndWithoutThoseNumbersBeenJustDots() {
-        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_100)).thenReturn(NUMBER_TEST_TIMES_TWO);
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
         model.setSecondNumber(NUMBER_TEST);
@@ -190,7 +182,6 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onEqualsPressedWithFirstAndSecondNumberWithoutThoseNumbersBeenJustDotsAndWithAMinusOperator() {
-        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_0)).thenReturn(NUMBER_ZERO);
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(MINUS);
         model.setSecondNumber(NUMBER_TEST);
@@ -199,7 +190,7 @@ public class CalculatorPresenterTest {
         assertNotEquals(DOT_BUTTON, model.getFirstNumber());
         assertNotEquals(DOT_BUTTON, model.getSecondNumber());
         presenter.onEqualsButtonPressed();
-        verify(mockedView).showResult(NUMBER_ZERO);
+        verify(mockedView).showResult(NUMBER_ZERO + ADD_TO_MATCH_RESULT);
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -207,7 +198,6 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onEqualsPressedWithFirstAndSecondNumberWithoutThoseNumbersBeenJustDotsAndWithAMultiplyOperator() {
-        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_25)).thenReturn(MULTIPLY_RESULT);
         model.setFirstNumber(REDUCED_NUMBER_TEST);
         model.setOperator(MULTIPLY);
         model.setSecondNumber(REDUCED_NUMBER_TEST);
@@ -216,7 +206,7 @@ public class CalculatorPresenterTest {
         assertNotEquals(DOT_BUTTON, model.getFirstNumber());
         assertNotEquals(DOT_BUTTON, model.getSecondNumber());
         presenter.onEqualsButtonPressed();
-        verify(mockedView).showResult(MULTIPLY_RESULT);
+        verify(mockedView).showResult(MULTIPLY_RESULT + ADD_TO_MATCH_RESULT);
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -224,7 +214,6 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onEqualsPressedWithFirstAndSecondNumberWithoutThoseNumbersBeenJustDotsAndWithADivideOperator() {
-        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_5)).thenReturn(REDUCED_NUMBER_TEST);
         model.setFirstNumber(MULTIPLY_RESULT);
         model.setOperator(DIVIDE);
         model.setSecondNumber(REDUCED_NUMBER_TEST);
@@ -233,7 +222,7 @@ public class CalculatorPresenterTest {
         assertNotEquals(DOT_BUTTON, model.getFirstNumber());
         assertNotEquals(DOT_BUTTON, model.getSecondNumber());
         presenter.onEqualsButtonPressed();
-        verify(mockedView).showResult(REDUCED_NUMBER_TEST);
+        verify(mockedView).showResult(REDUCED_NUMBER_TEST + ADD_TO_MATCH_RESULT);
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());

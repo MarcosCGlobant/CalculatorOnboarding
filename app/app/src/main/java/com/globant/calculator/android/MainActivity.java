@@ -8,7 +8,6 @@ import com.example.myapplication.R;
 import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.presenter.CalculatorPresenter;
 import com.globant.calculator.android.mvp.view.CalculatorView;
-import com.globant.calculator.android.utils.DecimalUtils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        presenter = new CalculatorPresenter(new CalculatorModel(), new CalculatorView(this), new DecimalUtils());
+        presenter = new CalculatorPresenter(new CalculatorModel(), new CalculatorView(this));
     }
 
     @OnClick(R.id.number_one)
