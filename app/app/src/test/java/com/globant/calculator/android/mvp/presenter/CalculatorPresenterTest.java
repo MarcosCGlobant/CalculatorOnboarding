@@ -40,10 +40,12 @@ public class CalculatorPresenterTest {
     @Test
     public void onClearButtonPressedTest() {
         presenter.onClearButtonPress();
+
         verify(mockedView).showOperationPressed(NUMBER_ZERO);
         verify(mockedView).showResult(NUMBER_ZERO);
         verify(mockedView).handleDot(true);
         verify(mockedView, times(2)).handleOperations(false);
+
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -52,9 +54,12 @@ public class CalculatorPresenterTest {
     @Test
     public void onDeleteButtonPressedFirstNumberIsReducedTest() {
         model.setFirstNumber(NUMBER_TEST);
+
         presenter.onDeleteButtonPress();
+
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(REDUCED_NUMBER_TEST, model.getFirstNumber());
+
         verify(mockedView).showNumberPressed(REDUCED_NUMBER_TEST);
         verify(mockedView).handleDot(true);
     }
@@ -63,9 +68,12 @@ public class CalculatorPresenterTest {
     public void onDeleteButtonPressedSecondNumberIsReducedTest() {
         model.setSecondNumber(NUMBER_TEST_WITH_DOT);
         model.setOperator(PLUS);
+
         presenter.onDeleteButtonPress();
+
         assertNotEquals(EMPTY_STRING, model.getOperator());
         assertEquals(REDUCED_NUMBER_TEST_WITH_DOT, model.getSecondNumber());
+
         verify(mockedView).showNumberPressed(REDUCED_NUMBER_TEST_WITH_DOT);
         verify(mockedView).handleDot(false);
     }
@@ -73,9 +81,11 @@ public class CalculatorPresenterTest {
     @Test
     public void onOperatorPressedWhenOperatorEmptyShowOperatorAndSetOnModel() {
         model.setFirstNumber(NUMBER_TEST);
-        assertEquals(EMPTY_STRING, model.getOperator());
+
         presenter.onOperatorPressed(PLUS);
+
         assertNotEquals(EMPTY_STRING, model.getOperator());
+
         verify(mockedView).showOperationPressed(PLUS);
         verify(mockedView).handleDot(true);
     }
@@ -85,13 +95,14 @@ public class CalculatorPresenterTest {
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
         model.setSecondNumber(NUMBER_TEST);
-        assertNotEquals(EMPTY_STRING, model.getSecondNumber());
+
         presenter.onOperatorPressed(MINUS);
-        assertEquals(NUMBER_TEST_TIMES_TWO, model.getFirstNumber());
+
         verify(mockedView).showResult(NUMBER_TEST_TIMES_TWO);
-        model.setSecondNumber(EMPTY_STRING);
+
         assertEquals(EMPTY_STRING, model.getSecondNumber());
         assertNotEquals(EMPTY_STRING, model.getOperator());
+
         verify(mockedView).showOperationPressed(MINUS);
         verify(mockedView).handleDot(true);
     }
@@ -101,12 +112,11 @@ public class CalculatorPresenterTest {
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
         model.setSecondNumber(NUMBER_TEST);
-        assertNotEquals(EMPTY_STRING, model.getFirstNumber());
-        assertNotEquals(EMPTY_STRING, model.getSecondNumber());
-        assertNotEquals(DOT_BUTTON, model.getFirstNumber());
-        assertNotEquals(DOT_BUTTON, model.getSecondNumber());
+
         presenter.onEqualsButtonPressed();
+
         verify(mockedView).showResult(NUMBER_TEST_TIMES_TWO);
+
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -115,10 +125,11 @@ public class CalculatorPresenterTest {
     @Test
     public void onEqualsPressedWithFirstNumberAndNoOperatorAndWithoutNumberBeenADot() {
         model.setFirstNumber(NUMBER_TEST);
-        assertEquals(EMPTY_STRING, model.getOperator());
-        assertNotEquals(DOT_BUTTON, model.getFirstNumber());
+
         presenter.onEqualsButtonPressed();
+
         verify(mockedView).showResult(NUMBER_TEST);
+
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -128,12 +139,15 @@ public class CalculatorPresenterTest {
     public void onEqualsPressedWithWrongConditionsShowErrorMessage() {
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
+
         presenter.onEqualsButtonPressed();
+
         verify(mockedView).showError();
         verify(mockedView).showOperationPressed(NUMBER_ZERO);
         verify(mockedView).showResult(NUMBER_ZERO);
         verify(mockedView).handleDot(true);
         verify(mockedView, times(2)).handleOperations(false);
+
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -142,8 +156,11 @@ public class CalculatorPresenterTest {
     @Test
     public void onNumberButtonPressedWithFirstNumberAndNoOperatorAddInputAndShowFullNumber() {
         model.setFirstNumber(REDUCED_NUMBER_TEST);
+
         presenter.onNumberButtonPress(NUMBER_ZERO);
+
         assertEquals(NUMBER_TEST, model.getFirstNumber());
+
         verify(mockedView).showNumberPressed(NUMBER_TEST);
         verify(mockedView).handleOperations(true);
     }
@@ -153,8 +170,11 @@ public class CalculatorPresenterTest {
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
         model.setSecondNumber(REDUCED_NUMBER_TEST);
+
         presenter.onNumberButtonPress(NUMBER_ZERO);
+
         assertEquals(NUMBER_TEST, model.getSecondNumber());
+
         verify(mockedView).showNumberPressed(NUMBER_TEST);
         verify(mockedView).handleOperations(true);
     }
@@ -163,8 +183,11 @@ public class CalculatorPresenterTest {
     public void onNumberButtonPressedWithoutSecondNumberAndWithOperatorAddDotAndShowFullNumber() {
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
+
         presenter.onNumberButtonPress(DOT_BUTTON);
+
         assertEquals(DOT_BUTTON, model.getSecondNumber());
+
         verify(mockedView).showNumberPressed(DOT_BUTTON);
         verify(mockedView).handleDot(false);
         verify(mockedView).handleOperations(true);
@@ -173,7 +196,9 @@ public class CalculatorPresenterTest {
     @Test
     public void onNumberButtonPressedWithoutFirstNumberAddDotAndShowFullNumber() {
         presenter.onNumberButtonPress(DOT_BUTTON);
+
         assertEquals(DOT_BUTTON, model.getFirstNumber());
+
         verify(mockedView).showNumberPressed(DOT_BUTTON);
         verify(mockedView).handleDot(false);
         verify(mockedView).handleOperations(true);
@@ -184,12 +209,11 @@ public class CalculatorPresenterTest {
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(MINUS);
         model.setSecondNumber(NUMBER_TEST);
-        assertNotEquals(EMPTY_STRING, model.getFirstNumber());
-        assertNotEquals(EMPTY_STRING, model.getSecondNumber());
-        assertNotEquals(DOT_BUTTON, model.getFirstNumber());
-        assertNotEquals(DOT_BUTTON, model.getSecondNumber());
+
         presenter.onEqualsButtonPressed();
+
         verify(mockedView).showResult(NUMBER_ZERO + ADD_TO_MATCH_RESULT);
+
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -200,12 +224,11 @@ public class CalculatorPresenterTest {
         model.setFirstNumber(REDUCED_NUMBER_TEST);
         model.setOperator(MULTIPLY);
         model.setSecondNumber(REDUCED_NUMBER_TEST);
-        assertNotEquals(EMPTY_STRING, model.getFirstNumber());
-        assertNotEquals(EMPTY_STRING, model.getSecondNumber());
-        assertNotEquals(DOT_BUTTON, model.getFirstNumber());
-        assertNotEquals(DOT_BUTTON, model.getSecondNumber());
+
         presenter.onEqualsButtonPressed();
+
         verify(mockedView).showResult(MULTIPLY_RESULT + ADD_TO_MATCH_RESULT);
+
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -216,12 +239,11 @@ public class CalculatorPresenterTest {
         model.setFirstNumber(MULTIPLY_RESULT);
         model.setOperator(DIVIDE);
         model.setSecondNumber(REDUCED_NUMBER_TEST);
-        assertNotEquals(EMPTY_STRING, model.getFirstNumber());
-        assertNotEquals(EMPTY_STRING, model.getSecondNumber());
-        assertNotEquals(DOT_BUTTON, model.getFirstNumber());
-        assertNotEquals(DOT_BUTTON, model.getSecondNumber());
+
         presenter.onEqualsButtonPressed();
+
         verify(mockedView).showResult(REDUCED_NUMBER_TEST + ADD_TO_MATCH_RESULT);
+
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
@@ -232,16 +254,15 @@ public class CalculatorPresenterTest {
         model.setFirstNumber(MULTIPLY_RESULT);
         model.setOperator(DIVIDE);
         model.setSecondNumber(NUMBER_ZERO);
-        assertNotEquals(EMPTY_STRING, model.getFirstNumber());
-        assertNotEquals(EMPTY_STRING, model.getSecondNumber());
-        assertNotEquals(DOT_BUTTON, model.getFirstNumber());
-        assertNotEquals(DOT_BUTTON, model.getSecondNumber());
+
         presenter.onEqualsButtonPressed();
+
         verify(mockedView).showError();
         verify(mockedView).showOperationPressed(NUMBER_ZERO);
         verify(mockedView).showResult(NUMBER_ZERO);
         verify(mockedView).handleDot(true);
         verify(mockedView, times(2)).handleOperations(false);
+
         assertEquals(EMPTY_STRING, model.getFirstNumber());
         assertEquals(EMPTY_STRING, model.getOperator());
         assertEquals(EMPTY_STRING, model.getSecondNumber());
