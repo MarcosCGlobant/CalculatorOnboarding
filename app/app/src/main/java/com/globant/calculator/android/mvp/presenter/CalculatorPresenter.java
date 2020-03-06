@@ -1,11 +1,8 @@
 package com.globant.calculator.android.mvp.presenter;
 
-import android.icu.text.DecimalFormat;
-
 import com.globant.calculator.android.mvp.model.CalculatorModel;
 import com.globant.calculator.android.mvp.view.CalculatorView;
 
-import static com.globant.calculator.android.utils.Constants.DECIMAL_FORMAT;
 import static com.globant.calculator.android.utils.Constants.DIVIDE;
 import static com.globant.calculator.android.utils.Constants.DOT_BUTTON;
 import static com.globant.calculator.android.utils.Constants.EMPTY_STRING;
@@ -19,7 +16,6 @@ import static com.globant.calculator.android.utils.Constants.ZERO_INT;
 
 public class CalculatorPresenter {
 
-    private DecimalFormat decimalFormatForResults = new DecimalFormat(DECIMAL_FORMAT);
     private CalculatorModel model;
     private CalculatorView view;
 
@@ -123,10 +119,10 @@ public class CalculatorPresenter {
                 }
                 break;
         }
-        return String.valueOf(decimalFormatForResults.format(result));
+        return String.valueOf(result);
     }
 
-    public void controlDot(String number) {
+    private void controlDot(String number) {
         if (number.contains(DOT_BUTTON)) {
             view.handleDot(false);
         } else {
@@ -134,7 +130,7 @@ public class CalculatorPresenter {
         }
     }
 
-    public String deleteAndShowNumber(String number) {
+    private String deleteAndShowNumber(String number) {
         if (!number.isEmpty()) {
             number = number.substring(ZERO_INT, number.length() - ONE_INT);
             view.showNumberPressed(number);
@@ -143,7 +139,7 @@ public class CalculatorPresenter {
         return number;
     }
 
-    public void setValuesOperatorAndHandledDot(String symbol) {
+    private void setValuesOperatorAndHandledDot(String symbol) {
         model.setOperator(symbol);
         view.showOperationPressed(symbol);
         view.handleDot(true);
