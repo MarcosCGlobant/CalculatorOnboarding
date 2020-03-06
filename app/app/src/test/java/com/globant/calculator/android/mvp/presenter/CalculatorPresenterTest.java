@@ -33,6 +33,10 @@ public class CalculatorPresenterTest {
     private static final String REDUCED_NUMBER_TEST_WITH_DOT = "50.1";
     private static final String NUMBER_TEST_TIMES_TWO = "100";
     private static final String MULTIPLY_RESULT = "25";
+    private static final Double DOUBLE_RESULT_100 = 100.0;
+    private static final Double DOUBLE_RESULT_25 = 25.0;
+    private static final Double DOUBLE_RESULT_0 = 0.0;
+    private static final Double DOUBLE_RESULT_5 = 5.0;
 
     @Before
     public void setUp() {
@@ -84,7 +88,7 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onOperatorPressedWithSecondNumberShowOperatorAndSetOnModel() {
-        when(decimalFormatForResults.getResultWithNewFormat(100.0)).thenReturn("100");
+        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_100)).thenReturn(NUMBER_TEST_TIMES_TWO);
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
         model.setSecondNumber(NUMBER_TEST);
@@ -101,7 +105,7 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onEqualsPressedWithFirstAndSecondNumberAndWithoutThoseNumbersBeenJustDots() {
-        when(decimalFormatForResults.getResultWithNewFormat(100.0)).thenReturn("100");
+        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_100)).thenReturn(NUMBER_TEST_TIMES_TWO);
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(PLUS);
         model.setSecondNumber(NUMBER_TEST);
@@ -186,7 +190,7 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onEqualsPressedWithFirstAndSecondNumberWithoutThoseNumbersBeenJustDotsAndWithAMinusOperator() {
-        when(decimalFormatForResults.getResultWithNewFormat(0.0)).thenReturn("0");
+        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_0)).thenReturn(NUMBER_ZERO);
         model.setFirstNumber(NUMBER_TEST);
         model.setOperator(MINUS);
         model.setSecondNumber(NUMBER_TEST);
@@ -203,7 +207,7 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onEqualsPressedWithFirstAndSecondNumberWithoutThoseNumbersBeenJustDotsAndWithAMultiplyOperator() {
-        when(decimalFormatForResults.getResultWithNewFormat(25.0)).thenReturn("25");
+        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_25)).thenReturn(MULTIPLY_RESULT);
         model.setFirstNumber(REDUCED_NUMBER_TEST);
         model.setOperator(MULTIPLY);
         model.setSecondNumber(REDUCED_NUMBER_TEST);
@@ -220,7 +224,7 @@ public class CalculatorPresenterTest {
 
     @Test
     public void onEqualsPressedWithFirstAndSecondNumberWithoutThoseNumbersBeenJustDotsAndWithADivideOperator() {
-        when(decimalFormatForResults.getResultWithNewFormat(5.0)).thenReturn("5");
+        when(decimalFormatForResults.getResultWithNewFormat(DOUBLE_RESULT_5)).thenReturn(REDUCED_NUMBER_TEST);
         model.setFirstNumber(MULTIPLY_RESULT);
         model.setOperator(DIVIDE);
         model.setSecondNumber(REDUCED_NUMBER_TEST);
